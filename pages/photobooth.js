@@ -1,5 +1,6 @@
 import React from "react";
-import { capturePhoto } from "../src/api";
+import { capturePhoto, getLastImage } from "../src/api";
+import debounce from "lodash/debounce";
 
 class PhotoBooth extends React.Component {
   state = {
@@ -8,7 +9,8 @@ class PhotoBooth extends React.Component {
     srStart: false,
     showDirections: false,
     readyToShoot: false,
-    done: false
+    done: false,
+    takenPhoto: ""
   };
 
   initSpeechRecognition = () => {
@@ -51,13 +53,21 @@ class PhotoBooth extends React.Component {
     commands(["3", "three"], () => {
       this.setPhotos(3);
     });
-    commands(["4", "four", "for", "or"], () => {
+    commands(["4", "four", "for", "or", "fart"], () => {
       this.setPhotos(4);
     });
     commands(
-      ["cheese", "she's", "cheap", "chief", "cheats", "sheetz", "chase"],
-      () => {
-        capturePhoto();
+      [
+        "cheese",
+        "she's",
+        "cheap",
+        "chief",
+        "cheats",
+        "sheetz",
+        "chase",
+        "cease"
+      ],
+      async () => {
         if (this.state.numPhotos > 0) {
           this.setState(prevState => ({
             numPhotos: prevState.numPhotos - 1
@@ -67,21 +77,24 @@ class PhotoBooth extends React.Component {
             done: true
           });
         }
+
+        await capturePhoto();
+        const lastImage = await getLastImage();
+        console.log(lastImage);
+        this.setState({
+          takenPhoto: lastImage
+        });
+
+        setTimeout(() => {
+          this.setState({
+            takenPhoto: null
+          });
+        }, 4000);
       }
     );
   };
   setToReady = () => {
     this.setState({ readyToShoot: true });
-  };
-  debounce = (callback, time) => {
-    let interval;
-    return (...args) => {
-      clearTimeout(interval);
-      interval = setTimeout(() => {
-        interval = null;
-        callback(...args);
-      }, time);
-    };
   };
   startListening = () => {
     const hasSpeechRecognition = "webkitSpeechRecognition" in window;
@@ -102,7 +115,7 @@ class PhotoBooth extends React.Component {
         this.checkCommands();
       };
 
-      sr.onresult = this.debounce(transcribe, 500);
+      sr.onresult = debounce(transcribe, 500);
       sr.onerror = function(event) {};
     }
   };
@@ -127,26 +140,34 @@ class PhotoBooth extends React.Component {
             <div className="photo-max">(Four photos max)</div>
           </div>
         )}
-        {this.state.showDirections && !this.state.done && (
-          <div className="directions">
-            <div className="directions-title">Directions</div>
-            1. Pose
-            <br />
-            2. Look at the Camera
-            <br />
-            3. Say "Cheese" to take a picture
-            {/* <div>
+        {this.state.showDirections &&
+          !this.state.takenPhoto &&
+          !this.state.done && (
+            <div className="directions">
+              <div className="directions-title">Directions</div>
+              1. Pose
+              <br />
+              2. Look at the Camera
+              <br />
+              3. Say "Cheese" to take a picture take here start:
+              {/* <div>
               {!this.state.readyToShoot && (
                 <button className="ready-button" onClick={this.setToReady}>
                   Ready
                 </button>
               )}
             </div> */}
-            <div className="photos-left">
-              {this.state.numPhotos} photos left
+              <div className="photos-left">
+                {this.state.numPhotos} photos left
+              </div>
             </div>
+          )}
+        {this.state.takenPhoto && (
+          <div className="imageDisplayed">
+            {<img src={this.state.takenPhoto} />}
           </div>
         )}
+
         <style jsx>{`
           .photo-booth {
             position: fixed;
