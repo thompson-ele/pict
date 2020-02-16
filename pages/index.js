@@ -10,23 +10,34 @@ class Home extends Component {
     super(props);
 
     this.state = {
-      images: []
+      images: null
     };
   }
 
-  render() {
+  componentDidMount = () => {
+    console.log("componentDidMount");
     getAllImages().then(response => {
-      console.log(response);
       this.setState(() => {
-        images: response;
+        return { images: response };
       });
     });
+  };
+
+  loadImages = imgURLs => {};
+
+  render() {
     return (
       <div>
         <Head>
           <title>Home</title>
           <link rel="icon" href="/favicon.ico" />
         </Head>
+
+        {this.state.images !== null &&
+          this.state.images.length > 0 &&
+          this.state.images.map((image, index) => (
+            <img src={image} key={index} alt={image} width="200" />
+          ))}
 
         <Nav />
         <div className="hero">
