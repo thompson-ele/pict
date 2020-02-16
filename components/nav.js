@@ -3,8 +3,8 @@ import Link from "next/link";
 import { withRouter } from "next/router";
 
 const links = [
-  { href: "/events", label: "Events" },
-  { href: "/accounts", label: "Accounts" },
+  // { href: "/events", label: "Events" },
+  // { href: "/accounts", label: "Accounts" },
   { href: "/photobooth", label: "Photobooth" },
   { href: "/slideshow", label: "Slideshow" },
   { href: "/pose", label: "Strike-A-Pose" }
@@ -18,7 +18,9 @@ const Nav = ({ router }) => (
     <ul>
       <li>
         <Link href="/">
-          <a className="brand">PICT</a>
+          <a className="brand">
+            <img height="100" src="/pict_favicon.svg" />
+          </a>
         </Link>
       </li>
       {links.map(({ key, href, label }) => (
