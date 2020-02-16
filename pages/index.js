@@ -1,6 +1,7 @@
 import React from 'react'
 import Head from 'next/head'
 import Nav from '../components/nav'
+import Button from '@material-ui/core/Button';
 
 const Home = () => (
   <div>
@@ -10,8 +11,20 @@ const Home = () => (
     </Head>
 
     <Nav />
-
     <div className="hero">
+      <Button variant="contained">Default</Button>
+      <Button variant="contained" color="primary">
+        Primary
+      </Button>
+      <Button variant="contained" color="secondary">
+        Secondary
+      </Button>
+      <Button variant="contained" disabled>
+        Disabled
+      </Button>
+      <Button variant="contained" color="primary" href="#contained-buttons">
+        Link
+      </Button>
       <h1 className="title">Welcome to Next.js!</h1>
       <p className="description">
         To get started, edit <code>pages/index.js</code> and save to reload.
