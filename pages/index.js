@@ -10,7 +10,7 @@ class Home extends Component {
 
   render() {
     return (
-      <div>
+      <div className="site-wrapper">
         <Head>
           <title>Home</title>
           <link rel="icon" href="/favicon.ico" />

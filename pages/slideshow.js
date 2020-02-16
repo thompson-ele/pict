@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import Head from "next/head";
 import Nav from "../components/nav";
+import theme from "../src/theme";
 import { getAllImages } from "../src/api";
 
 class Slideshow extends Component {
@@ -15,9 +16,11 @@ class Slideshow extends Component {
 
   componentDidMount = () => {
     getAllImages().then(response => {
-      this.setState(() => {
-        return { allImages: response, activeImages: [response[0]] };
-      });
+      if (response) {
+        this.setState(() => {
+          return { allImages: response, activeImages: [response[0]] };
+        });
+      }
     });
   };
 
@@ -33,7 +36,7 @@ class Slideshow extends Component {
 
   render() {
     return (
-      <div>
+      <div className="site-wrapper">
         <Head>
           <title>Home</title>
           <link rel="icon" href="/favicon.ico" />
@@ -42,6 +45,7 @@ class Slideshow extends Component {
         <Nav />
 
         <main>
+          <h1>Event Slideshow</h1>
           {this.state.activeImages.length > 0
             ? this.state.activeImages.map((image, index) => {
                 return (
@@ -59,10 +63,18 @@ class Slideshow extends Component {
         </main>
 
         <style jsx>{`
+          h1 {
+            font-family: "Roboto";
+            font-size: 32px;
+          }
           .slideshow-img-thumb {
             background-color: #f4f4f4;
             width: 170px;
             height: 170px;
+            overflow: hidden;
+          }
+          .slideshow-img-thumb img {
+            height: 100%;
           }
         `}</style>
       </div>
