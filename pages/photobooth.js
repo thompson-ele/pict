@@ -1,5 +1,5 @@
 import React from "react";
-import { capturePhoto } from "../src/utils";
+import { capturePhoto } from "../src/api";
 class PhotoBooth extends React.Component {
   state = {
     transcript: "hello"
