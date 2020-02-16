@@ -1,56 +1,68 @@
-import React from 'react'
-import Link from 'next/link'
+import React from "react";
+import Link from "next/link";
+import { withRouter } from "next/router";
 
 const links = [
-  { href: 'https://zeit.co/now', label: 'ZEIT' },
-  { href: 'https://github.com/zeit/next.js', label: 'GitHub' },
+  { href: "/events", label: "Events" },
+  { href: "/accounts", label: "Accounts" },
+  { href: "/photobooth", label: "Photobooth" },
+  { href: "/slideshow", label: "Slideshow" }
 ].map(link => ({
   ...link,
-  key: `nav-link-${link.href}-${link.label}`,
-}))
+  key: `nav-link-${link.href}-${link.label}`
+}));
 
-const Nav = () => (
-  <nav>
+const Nav = ({ router }) => (
+  <nav className="side-nav">
     <ul>
       <li>
         <Link href="/">
-          <a>Home</a>
+          <a className="brand">PICT</a>
         </Link>
       </li>
       {links.map(({ key, href, label }) => (
         <li key={key}>
-          <a href={href}>{label}</a>
+          <a href={href} className={router.pathname == href ? "active" : ""}>
+            {label}
+          </a>
         </li>
       ))}
     </ul>
 
     <style jsx>{`
-      :global(body) {
+      .side-nav {
+        background-color: #f4f4f4;
         margin: 0;
-        font-family: -apple-system, BlinkMacSystemFont, Avenir Next, Avenir,
-          Helvetica, sans-serif;
+        width: 269px;
       }
-      nav {
-        text-align: center;
+      .side-nav ul {
+        list-style: none;
+        margin: 0;
+        padding: 10px;
       }
-      ul {
-        display: flex;
-        justify-content: space-between;
+      .side-nav li {
+        font-size: 24px;
       }
-      nav > ul {
-        padding: 4px 16px;
-      }
-      li {
-        display: flex;
-        padding: 6px 8px;
-      }
-      a {
-        color: #067df7;
+      .side-nav ul li a {
+        color: #000;
+        display: block;
+        padding: 10px;
         text-decoration: none;
-        font-size: 13px;
+      }
+      .side-nav ul li a.active,
+      .side-nav ul li a:hover {
+        background-color: #fff;
+        border-radius: 25px;
+      }
+      .brand {
+        font-size: 64px;
+      }
+      a.brand:hover {
+        background-color: #f4f4f4 !important;
+        border-radius: 0 !important;
       }
     `}</style>
   </nav>
-)
+);
 
-export default Nav
+export default withRouter(Nav);

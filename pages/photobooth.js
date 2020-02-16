@@ -1,5 +1,5 @@
 import React from "react";
-import { capturePhoto } from "../src/utils";
+import { capturePhoto } from "../src/api";
 
 class PhotoBooth extends React.Component {
   state = {
@@ -51,7 +51,7 @@ class PhotoBooth extends React.Component {
     commands(["3", "three"], () => {
       this.setPhotos(3);
     });
-    commands(["4", "four", "for"], () => {
+    commands(["4", "four", "for", "or"], () => {
       this.setPhotos(4);
     });
     commands(

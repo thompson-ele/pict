@@ -1,34 +1,23 @@
 import React, { Component } from "react";
-import axios from "axios";
 import Head from "next/head";
 import Nav from "../components/nav";
 import Button from "@material-ui/core/Button";
-import { getAllImages } from "../src/utils";
 
 class Home extends Component {
   constructor(props) {
     super(props);
-
-    this.state = {
-      images: []
-    };
   }
 
   render() {
-    getAllImages().then(response => {
-      console.log(response);
-      this.setState(() => {
-        images: response;
-      });
-    });
     return (
-      <div>
+      <div className="site-wrapper">
         <Head>
           <title>Home</title>
           <link rel="icon" href="/favicon.ico" />
         </Head>
 
         <Nav />
+
         <div className="hero">
           <Button variant="contained">Default</Button>
           <Button variant="contained" color="primary">
