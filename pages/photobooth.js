@@ -1,4 +1,5 @@
 import React from "react";
+import { capturePhoto } from "../src/utils";
 class PhotoBooth extends React.Component {
   state = {
     transcript: "hello"
@@ -19,6 +20,7 @@ class PhotoBooth extends React.Component {
     });
   };
   startListening = () => {
+    capturePhoto();
     const hasSpeechRecognition = "webkitSpeechRecognition" in window;
     if (hasSpeechRecognition) {
       const sr = this.initSpeechRecognition();
@@ -43,9 +45,12 @@ class PhotoBooth extends React.Component {
             commands(["4", "four", "for"], () => {
               alert("four photo");
             });
-            commands(["cheese", "she's", "cheap"], () => {
-              alert("snapped photo");
-            });
+            commands(
+              ["cheese", "she's", "cheap", "chief", "cheats", "sheetz"],
+              () => {
+                capturePhoto();
+              }
+            );
           } else {
             interimTranscripts += transcript;
           }
@@ -64,8 +69,9 @@ class PhotoBooth extends React.Component {
           Touch
           <br />
           To start
+          <br />
+          {this.state.transcript}
         </button>
-        <div>{this.state.transcript}</div>
 
         <style jsx>{`
           .photo-booth {
