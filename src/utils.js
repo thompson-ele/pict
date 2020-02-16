@@ -9,7 +9,9 @@ const api = axios.create({
 
 const capturePhoto = () => {
   return api
-    .post("shooting/control/shutterbutton", { body: { af: true } })
+    .post("shooting/control/shutterbutton", {
+      af: true
+    })
     .then(response => {
       return response;
     })

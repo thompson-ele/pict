@@ -46,7 +46,15 @@ class PhotoBooth extends React.Component {
               alert("four photo");
             });
             commands(
-              ["cheese", "she's", "cheap", "chief", "cheats", "sheetz"],
+              [
+                "cheese",
+                "she's",
+                "cheap",
+                "chief",
+                "cheats",
+                "sheetz",
+                "chase"
+              ],
               () => {
                 capturePhoto();
               }
@@ -70,7 +78,7 @@ class PhotoBooth extends React.Component {
           <br />
           To start
           <br />
-          {this.state.transcript}
+          {/* {this.state.transcript} */}
         </button>
 
         <style jsx>{`
