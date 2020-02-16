@@ -3,32 +3,24 @@ import axios from "axios";
 import Head from "next/head";
 import Nav from "../components/nav";
 import Button from "@material-ui/core/Button";
+import { getAllImages } from "../src/utils";
 
 class Home extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      data: null
+      images: []
     };
   }
 
   render() {
-    const instance = axios.create({
-      baseURL: "http://10.3.19.74:8080/ccapi/",
-      timeout: 1000
-    });
-
-    instance
-      .get("ver100/contents/sd/100CANON/")
-      .then(response => {
-        console.log(response);
-        return response;
-      })
-      .catch(error => {
-        console.warn(error);
+    getAllImages().then(response => {
+      console.log(response);
+      this.setState(() => {
+        images: response;
       });
-
+    });
     return (
       <div>
         <Head>
