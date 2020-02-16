@@ -1,4 +1,5 @@
 import React from "react";
+import Nav from "../components/Nav";
 import { capturePhoto } from "../src/api";
 
 class Pose extends React.Component {
@@ -67,28 +68,31 @@ class Pose extends React.Component {
 
   render() {
     return (
-      <div>
-        <div className="container">
-          <div className="video-wrap">
-            <video
-              ref="cameraOutput"
-              width="640"
-              height="480"
-              preload
-              autoPlay
-              loop
-              muted
-            ></video>
+      <div class="site-wrapper">
+        <Nav />
+        <main>
+          <div className="container">
+            <div className="video-wrap">
+              <video
+                ref="cameraOutput"
+                width="640"
+                height="480"
+                preload
+                autoPlay
+                loop
+                muted
+              ></video>
+            </div>
+            <div className="canvas-wrap">
+              <canvas ref="canvas" width="640" height="480"></canvas>
+            </div>
           </div>
-          <div className="canvas-wrap">
-            <canvas ref="canvas" width="640" height="480"></canvas>
-          </div>
-        </div>
+        </main>
         <style jsx>{`
           .container {
             height: 480px;
             position: relative;
-            margin-top: 13vh;
+            margin-top: 1vh;
           }
           .video-wrap {
             position: absolute;

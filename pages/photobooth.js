@@ -10,7 +10,8 @@ class PhotoBooth extends React.Component {
     showDirections: false,
     readyToShoot: false,
     done: false,
-    takenPhoto: ""
+    takenPhoto: "",
+    okayToShoot: false
   };
 
   initSpeechRecognition = () => {
@@ -68,17 +69,20 @@ class PhotoBooth extends React.Component {
         "cease"
       ],
       async () => {
-        if (this.state.numPhotos > 0) {
-          this.setState(prevState => ({
-            numPhotos: prevState.numPhotos - 1
-          }));
-        } else {
-          this.setState({
-            done: true
-          });
+        if (this.state.okayToShoot) {
+          if (this.state.numPhotos > 0) {
+            this.setState(prevState => ({
+              numPhotos: prevState.numPhotos - 1
+            }));
+          } else {
+            this.setState({
+              done: true
+            });
+          }
         }
-
+        this.setState({ okayToShoot: true });
         await capturePhoto();
+        this.setState({ okayToShoot: false });
         const lastImage = await getLastImage();
         console.log(lastImage);
         this.setState({
@@ -149,7 +153,7 @@ class PhotoBooth extends React.Component {
               <br />
               2. Look at the Camera
               <br />
-              3. Say "Cheese" to take a picture take here start:
+              3. Say "Cheese" to take a picture
               {/* <div>
               {!this.state.readyToShoot && (
                 <button className="ready-button" onClick={this.setToReady}>
@@ -158,7 +162,7 @@ class PhotoBooth extends React.Component {
               )}
             </div> */}
               <div className="photos-left">
-                {this.state.numPhotos} photos left
+                {/* {this.state.numPhotos} photos left */}
               </div>
             </div>
           )}
