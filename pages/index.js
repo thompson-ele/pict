@@ -1,7 +1,10 @@
 import React, { Component } from "react";
+import Card from "@material-ui/core/Card";
+import CardContent from "@material-ui/core/CardContent";
 import Head from "next/head";
+import Link from "next/link";
 import Nav from "../components/nav";
-import Button from "@material-ui/core/Button";
+import Typography from "@material-ui/core/Typography";
 
 class Home extends Component {
   constructor(props) {
@@ -9,6 +12,21 @@ class Home extends Component {
   }
 
   render() {
+    const cardStyles = {
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center",
+      width: 450,
+      height: 450,
+      marginRight: 20
+    };
+    const cardContainerStyles = {
+      display: "flex",
+      width: "100%",
+      height: "100%",
+      justifyContent: "space-around",
+      alignItems: "center"
+    };
     return (
       <div className="site-wrapper">
         <Head>
@@ -18,72 +36,57 @@ class Home extends Component {
 
         <Nav />
 
-        <div className="hero">
-          <Button variant="contained">Default</Button>
-          <Button variant="contained" color="primary">
-            Primary
-          </Button>
-          <Button variant="contained" color="secondary">
-            Secondary
-          </Button>
-          <Button variant="contained" disabled>
-            Disabled
-          </Button>
-          <Button variant="contained" color="primary" href="#contained-buttons">
-            Link
-          </Button>
-          <h1 className="title">Welcome to Next.js!</h1>
-          <p className="description">
-            To get started, edit <code>pages/index.js</code> and save to reload.
-          </p>
-        </div>
+        <main style={{ marginTop: 0 }}>
+          <div style={cardContainerStyles}>
+            <Link href="/photobooth">
+              <a style={{ textDecoration: "none" }}>
+                <Card style={cardStyles}>
+                  <CardContent
+                    style={{
+                      display: "flex",
+                      justifyContent: "center",
+                      flexDirection: "column"
+                    }}
+                  >
+                    <img
+                      height="57.56"
+                      src="/photobooth-icon.svg"
+                      style={{ margin: "0 auto" }}
+                    />
+                    <Typography
+                      style={{
+                        fontFamily: "Bebas Neue",
+                        fontSize: 38,
+                        paddingBottom: 40
+                      }}
+                    >
+                      Photo Booth
+                    </Typography>
+                  </CardContent>
+                </Card>
+              </a>
+            </Link>
 
-        <style jsx>{`
-          .hero {
-            width: 100%;
-            color: #333;
-          }
-          .title {
-            margin: 0;
-            width: 100%;
-            padding-top: 80px;
-            line-height: 1.15;
-            font-size: 48px;
-          }
-          .title,
-          .description {
-            text-align: center;
-          }
-          .row {
-            max-width: 880px;
-            margin: 80px auto 40px;
-            display: flex;
-            flex-direction: row;
-            justify-content: space-around;
-          }
-          .card {
-            padding: 18px 18px 24px;
-            width: 220px;
-            text-align: left;
-            text-decoration: none;
-            color: #434343;
-            border: 1px solid #9b9b9b;
-          }
-          .card:hover {
-            border-color: #067df7;
-          }
-          .card h3 {
-            margin: 0;
-            color: #067df7;
-            font-size: 18px;
-          }
-          .card p {
-            margin: 0;
-            padding: 12px 0 0;
-            font-size: 13px;
-            color: #333;
-          }
-        `}</style>
+            <Link href="/slideshow">
+              <a style={{ textDecoration: "none" }}>
+                <Card style={cardStyles}>
+                  <CardContent>
+                    <img src="/slideshow-icon.svg" />
+                    <Typography
+                      style={{
+                        fontFamily: "Bebas Neue",
+                        fontSize: 38,
+                        paddingBottom: 40
+                      }}
+                    >
+                      Slideshow
+                    </Typography>
+                  </CardContent>
+                </Card>
+              </a>
+            </Link>
+          </div>
+        </main>
       </div>
     );
   }
