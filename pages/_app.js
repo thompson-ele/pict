@@ -42,6 +42,7 @@ export default class MyApp extends App {
             flex: 1;
             margin-top: 101px;
             padding-left: 89px;
+            padding-right: 89px;
           }
         `}</style>
       </React.Fragment>
