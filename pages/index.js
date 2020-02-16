@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import axios from "axios";
+import Head from "next/head";
 import Nav from "../components/nav";
 import Button from "@material-ui/core/Button";
 
