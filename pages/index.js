@@ -1,37 +1,12 @@
 import React, { Component } from "react";
-import axios from "axios";
 import Head from "next/head";
 import Nav from "../components/nav";
 import Button from "@material-ui/core/Button";
-import { getAllImages } from "../src/api";
 
 class Home extends Component {
   constructor(props) {
     super(props);
-
-    this.state = {
-      allImages: [],
-      activeImages: []
-    };
   }
-
-  componentDidMount = () => {
-    getAllImages().then(response => {
-      this.setState(() => {
-        return { allImages: response, activeImages: [response[0]] };
-      });
-    });
-  };
-
-  loadNextImg = index => {
-    if (index < this.state.allImages.length) {
-      this.setState((state, props) => {
-        return {
-          activeImages: [...state.activeImages, state.allImages[index + 1]]
-        };
-      });
-    }
-  };
 
   render() {
     return (
@@ -41,20 +16,8 @@ class Home extends Component {
           <link rel="icon" href="/favicon.ico" />
         </Head>
 
-        {this.state.activeImages.length > 0
-          ? this.state.activeImages.map((image, index) => {
-              return (
-                <img
-                  src={image}
-                  key={index}
-                  width="300"
-                  onLoad={() => this.loadNextImg(index)}
-                />
-              );
-            })
-          : "You have no pictures"}
-
         <Nav />
+
         <div className="hero">
           <Button variant="contained">Default</Button>
           <Button variant="contained" color="primary">
