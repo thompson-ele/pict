@@ -32,6 +32,7 @@ const Nav = ({ router }) => (
     <style jsx>{`
       .side-nav {
         background-color: #f4f4f4;
+        font-family: "Bebas Neue";
         margin: 0;
         width: 269px;
       }
