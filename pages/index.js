@@ -10,20 +10,28 @@ class Home extends Component {
     super(props);
 
     this.state = {
-      images: null
+      allImages: [],
+      activeImages: []
     };
   }
 
   componentDidMount = () => {
-    console.log("componentDidMount");
     getAllImages().then(response => {
       this.setState(() => {
-        return { images: response };
+        return { allImages: response, activeImages: [response[0]] };
       });
     });
   };
 
-  loadImages = imgURLs => {};
+  loadNextImg = index => {
+    if (index < this.state.allImages.length) {
+      this.setState((state, props) => {
+        return {
+          activeImages: [...state.activeImages, state.allImages[index + 1]]
+        };
+      });
+    }
+  };
 
   render() {
     return (
@@ -33,11 +41,18 @@ class Home extends Component {
           <link rel="icon" href="/favicon.ico" />
         </Head>
 
-        {this.state.images !== null &&
-          this.state.images.length > 0 &&
-          this.state.images.map((image, index) => (
-            <img src={image} key={index} alt={image} width="200" />
-          ))}
+        {this.state.activeImages.length > 0
+          ? this.state.activeImages.map((image, index) => {
+              return (
+                <img
+                  src={image}
+                  key={index}
+                  width="300"
+                  onLoad={() => this.loadNextImg(index)}
+                />
+              );
+            })
+          : "You have no pictures"}
 
         <Nav />
         <div className="hero">
