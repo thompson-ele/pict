@@ -3,7 +3,7 @@ import axios from "axios";
 import Head from "next/head";
 import Nav from "../components/nav";
 import Button from "@material-ui/core/Button";
-import { getAllImages } from "../src/utils";
+import { getAllImages } from "../src/api";
 
 class Home extends Component {
   constructor(props) {

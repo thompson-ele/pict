@@ -2,9 +2,16 @@ import axios from "axios";
 
 const BASE_URL = "http://10.3.19.74:8080/ccapi/ver100/";
 
+const api = axios.create({
+  baseURL: BASE_URL,
+  timeout: 1000
+});
+
 const capturePhoto = () => {
-  return axios
-    .post(BASE_URL + "shooting/control/shutterbutton", { body: { af: true } })
+  return api
+    .post("shooting/control/shutterbutton", {
+      af: true
+    })
     .then(response => {
       return response;
     })
@@ -14,8 +21,8 @@ const capturePhoto = () => {
 };
 
 const getAllImages = () => {
-  return axios
-    .get(BASE_URL + "contents/sd/100CANON/")
+  return api
+    .get("contents/sd/100CANON/")
     .then(response => {
       return response.data.url;
     })
