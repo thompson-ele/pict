@@ -8,16 +8,8 @@ const api = axios.create({
 });
 
 const capturePhoto = () => {
-  return api
-    .post("shooting/control/shutterbutton", {
-      af: true
-    })
-    .then(response => {
-      return getLastImage();
-    })
-    .catch(error => {
-      console.warn(error);
-    });
+  alert("PHOTO TAKEN!")
+  return 'http://www.google.com'
 };
 
 const getAllImages = () => {

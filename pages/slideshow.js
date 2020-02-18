@@ -10,18 +10,18 @@ class Slideshow extends Component {
     super(props);
 
     this.state = {
-      // allImages: [
-      //   "https://upload.wikimedia.org/wikipedia/commons/thumb/0/06/Kitten_in_Rizal_Park%2C_Manila.jpg/1200px-Kitten_in_Rizal_Park%2C_Manila.jpg",
-      //   "https://cdn.mos.cms.futurecdn.net/vChK6pTy3vN3KbYZ7UU7k3-320-80.jpg",
-      //   "https://www.aspca.org/sites/default/files/blog_foster-myth_062718_main.jpg",
-      //   "https://res.cloudinary.com/sagacity/image/upload/c_crop,h_1001,w_1500,x_0,y_0/c_limit,dpr_auto,f_auto,fl_lossy,q_80,w_1080/Kitten_murder_Jeff_Merkley_2_copy_hdpoxd.jpg",
-      //   "https://coleandmarmalade.com/wp-content/uploads/2020/01/Canva-Cute-American-cat-Kitten-scaled.jpg"
-      // ],
-      // activeImages: [
-      //   "https://upload.wikimedia.org/wikipedia/commons/thumb/0/06/Kitten_in_Rizal_Park%2C_Manila.jpg/1200px-Kitten_in_Rizal_Park%2C_Manila.jpg"
-      // ],
-      allImages: [],
-      activeImages: [],
+      allImages: [
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/0/06/Kitten_in_Rizal_Park%2C_Manila.jpg/1200px-Kitten_in_Rizal_Park%2C_Manila.jpg",
+        "https://cdn.mos.cms.futurecdn.net/vChK6pTy3vN3KbYZ7UU7k3-320-80.jpg",
+        "https://www.aspca.org/sites/default/files/blog_foster-myth_062718_main.jpg",
+        "https://res.cloudinary.com/sagacity/image/upload/c_crop,h_1001,w_1500,x_0,y_0/c_limit,dpr_auto,f_auto,fl_lossy,q_80,w_1080/Kitten_murder_Jeff_Merkley_2_copy_hdpoxd.jpg",
+        "https://coleandmarmalade.com/wp-content/uploads/2020/01/Canva-Cute-American-cat-Kitten-scaled.jpg"
+      ],
+      activeImages: [
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/0/06/Kitten_in_Rizal_Park%2C_Manila.jpg/1200px-Kitten_in_Rizal_Park%2C_Manila.jpg"
+      ],
+      // allImages: [],
+      // activeImages: [],
       selectedImages: []
     };
   }
